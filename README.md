@@ -1,5 +1,7 @@
 # Simple to create Twitter Like Button
 
+<img src="raw/twitter_favo.gif" width="250">
+
 
 # How to import
 
@@ -25,8 +27,6 @@ dependencies {
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 ```
-
-<img src="raw/twitter_favo.gif" width="250">
 
 
 
