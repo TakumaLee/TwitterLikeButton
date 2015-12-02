@@ -1,0 +1,99 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+version = "1.0.0"
+
+def siteUrl = 'http://takuma-nekomayoi-blog.logdown.com/'     // project homepage
+def gitUrl = 'https://github.com/TakumaMochizuki/TwitterFavoIcon.git'  // project git
+group = "com.github.kuma"
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 1
+        versionName version
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+}
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM. xml  with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+                name 'Simple to use Twitter like icon for Android'
+                url siteUrl
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'kuma'
+                        name 'TakumaLee'
+                        email 'vmgsahm1@gmail.com'
+                    }
+                }
+                scm { connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android. sourceSets .main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android. sourceSets .main.java.srcDirs
+    classpath += project.files( android.getBootClasspath(). join ( File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+bintray {
+    key = properties.getProperty("bintray.apikey")
+    user = properties.getProperty("bintray.user")
+    configurations = ['archives']
+    pkg {
+        repo = "maven"
+        name = "TwitterFavoIcon"                                                 // #CONFIG# project name in jcenter
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
+}
