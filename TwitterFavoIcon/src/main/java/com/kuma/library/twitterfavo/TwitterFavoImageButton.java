@@ -22,6 +22,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageButton;
 
 /**
@@ -33,6 +34,7 @@ import android.widget.ImageButton;
  *
  */
 public class TwitterFavoImageButton extends ImageButton {
+    private static final String TAG = TwitterFavoImageButton.class.getSimpleName();
     private static final int[] STATE_TOGGLED_ON = {R.attr.state_toggled_on};
 
     boolean isToggledOn;
@@ -64,6 +66,18 @@ public class TwitterFavoImageButton extends ImageButton {
                 a.recycle();
             }
         }
+        setOnClickListener(clickListener);
+    }
+
+    OnClickListener clickListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+        }
+    };
+
+    @Override
+    public void setOnClickListener(OnClickListener l) {
+        super.setOnClickListener(l == null ? clickListener : l);
     }
 
     @Override

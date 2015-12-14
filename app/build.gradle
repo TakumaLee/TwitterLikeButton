@@ -29,6 +29,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
 //    compile(group: 'com.github.kuma', name: 'TwitterFavoIcon', version: '1.0.0', ext: 'aar')
-    compile 'com.github.kuma:TwitterFavoIcon:1.0.0'
-//    compile project(':TwitterFavoIcon')
+//    compile 'com.github.kuma:TwitterFavoIcon:1.0.0'
+    compile project(':TwitterFavoIcon')
 }

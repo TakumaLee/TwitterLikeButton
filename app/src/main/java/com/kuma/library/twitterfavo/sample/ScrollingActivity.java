@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.kuma.library.twitterfavo.TwitterFavoImageButton;
 
@@ -20,12 +19,12 @@ public class ScrollingActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(com.kuma.library.twitterfavo.sample.R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        button = (TwitterFavoImageButton) findViewById(com.kuma.library.twitterfavo.sample.R.id.tw__tweet_like_button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
+//        button = (TwitterFavoImageButton) findViewById(com.kuma.library.twitterfavo.sample.R.id.tw__tweet_like_button);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//            }
+//        });
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
