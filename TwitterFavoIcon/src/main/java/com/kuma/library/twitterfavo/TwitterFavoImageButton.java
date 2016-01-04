@@ -60,7 +60,7 @@ public class TwitterFavoImageButton extends ImageButton {
 
             setImageResource(R.drawable.tw__like_action);
 
-            setToggledOn(false);
+            setToggledOn(toggleOnClick);
         } finally {
             if (a != null) {
                 a.recycle();
