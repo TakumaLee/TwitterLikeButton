@@ -13,7 +13,7 @@ repositories {
 	jcenter()
 }
 dependencies {
-    compile 'com.github.kuma:TwitterFavoIcon:1.0.1'
+    compile 'com.github.kuma:TwitterFavoIcon:1.0.3'
 }
 ```
 

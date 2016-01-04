@@ -56,11 +56,11 @@ public class TwitterFavoImageButton extends ImageButton {
             a = context.getTheme().obtainStyledAttributes(attrs,
                     R.styleable.TwitterFavoImageButton, defStyle, 0);
 
-            toggleOnClick = a.getBoolean(R.styleable.TwitterFavoImageButton_toggleOnClick, true);
+            toggleOnClick = a.getBoolean(R.styleable.TwitterFavoImageButton_toggleOnClick, false);
 
             setImageResource(R.drawable.tw__like_action);
 
-            setToggledOn(toggleOnClick);
+            setNormalToggleOn(toggleOnClick);
         } finally {
             if (a != null) {
                 a.recycle();
@@ -97,7 +97,24 @@ public class TwitterFavoImageButton extends ImageButton {
         return super.performClick();
     }
 
+    public void initToggleOn() {
+
+    }
+
+    @Deprecated
     public void setToggledOn(boolean isToggledOn) {
+        setAnimationToggledOn(isToggledOn);
+    }
+
+    public void setNormalToggleOn(boolean isToggledOn) {
+        if (isToggledOn) {
+            setImageResource(R.drawable.tw__action_heart_on_default);
+        } else {
+            setImageResource(R.drawable.tw__action_heart_off_default);
+        }
+    }
+
+    public void setAnimationToggledOn(boolean isToggledOn) {
         this.isToggledOn = isToggledOn;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             refreshDrawableState();
