@@ -117,6 +117,7 @@ public class TwitterFavoImageButton extends ImageButton {
     public void setAnimationToggledOn(boolean isToggledOn) {
         this.isToggledOn = isToggledOn;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setImageResource(R.drawable.tw__like_action);
             refreshDrawableState();
         } else {
             if (isToggledOn) {
