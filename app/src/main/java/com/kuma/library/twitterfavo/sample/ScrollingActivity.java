@@ -3,10 +3,13 @@ package com.kuma.library.twitterfavo.sample;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.kuma.library.twitterfavo.OnLikeChangedListener;
 import com.kuma.library.twitterfavo.TwitterFavoImageButton;
+import com.squareup.leakcanary.RefWatcher;
 
 public class ScrollingActivity extends AppCompatActivity {
 
@@ -19,12 +22,18 @@ public class ScrollingActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(com.kuma.library.twitterfavo.sample.R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        button = (TwitterFavoImageButton) findViewById(com.kuma.library.twitterfavo.sample.R.id.tw__tweet_like_button);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//            }
-//        });
+        button = (TwitterFavoImageButton) findViewById(com.kuma.library.twitterfavo.sample.R.id.tw__tweet_like_button);
+        button.setOnLikeChangedListener(new OnLikeChangedListener() {
+            @Override
+            public void onLike() {
+                Log.v("Twitter Demo", "Like");
+            }
+
+            @Override
+            public void onDislike() {
+                Log.v("Twitter Demo", "Dislike");
+            }
+        });
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -34,6 +43,13 @@ public class ScrollingActivity extends AppCompatActivity {
 //                        .setAction("Action", null).show();
 //            }
 //        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = MyApplication.getRefWatcher(this);
+        refWatcher.watch(this);
     }
 
     @Override

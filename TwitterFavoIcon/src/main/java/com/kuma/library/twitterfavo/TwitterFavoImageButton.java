@@ -40,6 +40,8 @@ public class TwitterFavoImageButton extends ImageButton {
     boolean isToggledOn;
     final boolean toggleOnClick;
 
+    private OnLikeChangedListener onLikeChangedListener;
+
     public TwitterFavoImageButton(Context context) {
         this(context, null);
     }
@@ -80,6 +82,10 @@ public class TwitterFavoImageButton extends ImageButton {
         super.setOnClickListener(l == null ? clickListener : l);
     }
 
+    public void setOnLikeChangedListener(OnLikeChangedListener onLikeChangedListener) {
+        this.onLikeChangedListener = onLikeChangedListener;
+    }
+
     @Override
     public int[] onCreateDrawableState(int extraSpace) {
         final int[] drawableState = super.onCreateDrawableState(extraSpace + 2);
@@ -91,9 +97,7 @@ public class TwitterFavoImageButton extends ImageButton {
 
     @Override
     public boolean performClick() {
-        if (toggleOnClick) {
-            toggle();
-        }
+        toggle();
         return super.performClick();
     }
 
@@ -107,6 +111,7 @@ public class TwitterFavoImageButton extends ImageButton {
     }
 
     public void setNormalToggleOn(boolean isToggledOn) {
+        this.isToggledOn = isToggledOn;
         if (isToggledOn) {
             setImageResource(R.drawable.tw__action_heart_on_default);
         } else {
@@ -127,6 +132,11 @@ public class TwitterFavoImageButton extends ImageButton {
             } else {
                 setImageResource(R.drawable.tw__like_action);
             }
+        }
+        if (this.isToggledOn) {
+            onLikeChangedListener.onLike();
+        } else {
+            onLikeChangedListener.onDislike();
         }
     }
 
